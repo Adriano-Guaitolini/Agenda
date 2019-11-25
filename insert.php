@@ -26,7 +26,7 @@ $sqlInsert = "INSERT INTO compromisso (compromisso, descricao, data)
 VALUES ('$compromissoInsert', '$descricaoInsert', '$databd')";
 
     if($conn->query($sqlInsert) === TRUE){
-        header("location: /teste/Calen2.php?mes=" . $data[1]. "&ano=" . $data[2]);
+        header("location: /agenda/Calen2.php?mes=" . $data[1]. "&ano=" . $data[2]);
         die();
     }else{
         echo "Error: " . $sqlInsert . "<br>" . $conn->error;

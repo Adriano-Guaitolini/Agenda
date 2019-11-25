@@ -1,0 +1,66 @@
+
+th {
+    text-align: center;
+    }
+
+    .coluna:hover{
+        background-color: #007BFF;
+    }
+
+h2 {
+    text-align: center 
+     }
+
+                    
+.superior {
+     text-align: center
+    }
+
+                        
+.col {
+    padding-top: 20px
+    }
+
+    
+.d-flex{
+   padding-left: 10px
+    }
+
+.FormCadastro, .FormEditar {
+    display:none
+    }
+
+.MostrarForm{
+    display: inline;
+}
+
+.formUpdate {
+    display:inline
+    }
+
+.esconderID{
+    display: none;
+}
+
+.Dia{
+    cursor: pointer;
+    color: #007BFF;
+    }
+
+.Seletor{
+    cursor: pointer;
+    background-color: #007BFF;
+}
+a:link {
+    text-decoration: none;
+    color: #FFFFFF;
+  }
+
+
+#anterior {
+    margin-right: 10px
+    }
+    
+#proximo {
+    margin-left: 10px
+}

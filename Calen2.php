@@ -76,47 +76,11 @@ $nomeDoMes = $mesEstenso[$numeroDoMes];
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-                
+            <link rel="stylesheet" href="style.css">
+            
                 <title>Document</title>
 
-                <style>
-       
-                    
-                
-                    th {
-                     text-align: center
-                     }
-
-                     h2 {
-                         text-align: center
-                     }
-                 
-                     .superior {
-                         text-align: center
-                     }
-                 
-                     .col {
-                         padding-top: 20px
-                     }
-
-                     .d-flex{
-                         padding-left: 10px
-                     }
-                     .formInsert {
-                        display:none
-                    }
-                    .formUpdate {
-                        display:none
-                    }
-                     
-                     #anterior {
-                         margin-right: 10px
-                     }
-                     #proximo {
-                         margin-left: 10px
-                     }
-    
-                </style>
+               
         </head>
     
     <body>
@@ -127,14 +91,14 @@ $nomeDoMes = $mesEstenso[$numeroDoMes];
             <div class="col">
 
                 <div class="superior">
-                    <a href="/teste/Calen2.php?mes=<?= $anterior ?>" class="btn btn-primary mb-2" id="anterior">&lt;</a>
+                    <a href="/agenda/Calen2.php?mes=<?= $anterior ?>" class="btn btn-primary mb-2" id="anterior">&lt;</a>
 
-                    <strong><?= $nomeDoMes . '/' . $nomeAno ?></strong>
+                    <a class="MesAno"><stong><?= $nomeDoMes . '/' . $nomeAno ?></stong></a>
 
-                    <a href="/teste/Calen2.php?mes=<?= $proximo ?>" class="btn btn-primary mb-2" id="proximo">&gt;</a>
+                    <a href="/agenda/Calen2.php?mes=<?= $proximo ?>" class="btn btn-primary mb-2" id="proximo">&gt;</a>
                 </div>
 
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered ">
         <thead>
             <th scope="col">Domingo</th>
             <th scope="col">Segunda</th>
@@ -163,7 +127,8 @@ $nomeDoMes = $mesEstenso[$numeroDoMes];
             echo "</tr>" . "<tr>";
         }
     
-    echo "<th>" . "<a href='javascript:;' onclick='data(\"" . str_pad("$i", 2, "0", STR_PAD_LEFT) . "\",\"" . str_pad("$mes", 2, "0", STR_PAD_LEFT) . "\",\"$ano\"); revelarInsert();'>" . $i . "</a>" . "</th>";
+    echo "<th class='coluna'>" . "<a class='Dia' onClick='data(\"".str_pad("$i",2,"0",STR_PAD_LEFT)."\",\"". str_pad("$mes",2, "0",STR_PAD_LEFT)."\",\"$ano\"); revelarCadastro();'>" . $i . "</a>" . "</th>";
+
     
     }
 
@@ -183,7 +148,7 @@ $nomeDoMes = $mesEstenso[$numeroDoMes];
 
 <div class="col">
 
-    <form class="formInsert" id="formInsert" name="form" method="post" action="insert.php" autocomplete="off">
+    <form class="FormCadastro" name="form" method="post" action="insert.php" autocomplete="off">
     
         <h1>Cadastro de Compromisso</h1>
         
@@ -191,23 +156,25 @@ $nomeDoMes = $mesEstenso[$numeroDoMes];
         
             <div class="form-group col-md-3">
                 <label for="data">Data</label>
-                <input type="text" readonly class="form-control" id="data" name="data"></input>
+                <input type="text" readonly class="form-control data" name="data" required></input>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="compromisso">Compromisso</label>
-                <input type="text" class="form-control" id="compromisso" name="compromisso"></input>
+                <input type="text" class="form-control compromisso" name="compromisso" maxlength="50" required></input>
             </div>
         </div>
         
         <div class="form-row">
             <div class="form-group col-md-9">
                 <label for="descreva">Descreva seu compromisso</label>
-                <textarea class="form-control" name="descricao" id="descreva" rows="3"></textarea>
+                <textarea class="form-control descreva" name="descricao" rows="3" maxlength="60"></textarea>
             </div>
         </div>
 
         <input type="submit" class="btn btn-primary mb-2" name="submit" value="Criar compromisso">
+        </input>
+        <input type="button" class="btn btn-primary mb-2" value="Fechar" onClick="fecharCadastro();">
         </input>
 
     </form>
@@ -217,37 +184,38 @@ $nomeDoMes = $mesEstenso[$numeroDoMes];
 
 <div class="col">
 
-    <form class="formUpdate" id="formUpdate" name="formUpdate" method="post" action="update.php" autocomplete="off">
+    <form class="FormEditar" id="formUpdate" name="formUpdate" method="post" action="update.php" autocomplete="off">
     
         <h1>Edição de Compromisso</h1>
         
         <div class="form-row">
-            
-            <div class="form-group col-md-3">
+
+            <div class="esconderID form-group col-md-3">
                 <label for="id">ID</label>
-                <input type="text" readonly class="form-control" id="idUpdate" name="id"></input>
-            </div>
-            
+                <input type="text" readonly class="form-control" id="id" name="id" required></input>
+            </div>           
             
             <div class="form-group col-md-3">
                 <label for="data">Data</label>
-                <input type="text" readonly class="form-control" id="dataUpdate" name="data"></input>
+                <input type="text" readonly class="form-control" id="dataUpdate" name="data" required></input>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="compromisso">Compromisso</label>
-                <input type="text" class="form-control" id="compromissoUpdate" name="compromisso"></input>
+                <input type="text" class="form-control" id="compromissoUpdate" name="compromisso" maxlength="50" required></input>
             </div>
         </div>
         
         <div class="form-row">
             <div class="form-group col-md-9">
                 <label for="descreva">Descreva seu compromisso</label>
-                <textarea class="form-control" name="descricao" id="descricaoUpdate" rows="3"></textarea>
+                <textarea class="form-control" name="descricao" id="descricaoUpdate" rows="3" maxlength="60"></textarea>
             </div>
         </div>
 
         <input type="submit" class="btn btn-primary mb-2" name="submit" value="Editar compromisso">
+        </input>
+        <input type="button" class="btn btn-primary mb-2" value="Fechar" onClick="fecharEditar();">
         </input>
 
     </form>
@@ -275,7 +243,7 @@ $nomeDoMes = $mesEstenso[$numeroDoMes];
                     <h2 class="d-flex justify-content-left">Compromissos do Mês</h2>
                     <table class="d-flex table table-striped table-bordered">
                     <tr>
-                    <th>ID</th>
+                    <th class="esconderID">ID</th>
                     <th>Data</th>
                     <th>Compromisso</th>
                     <th>Descrição</th>
@@ -294,11 +262,12 @@ $nomeDoMes = $mesEstenso[$numeroDoMes];
                     if($mes == $data[1] && $ano == $data[0]){
 
                         ?>
-                            <th id="id"><?=$id?> </th>
+                            <th class="esconderID" id="id"><?=$id?> </th>
                             <th id="dataOutput"><?=$dataOutput?></th>
                             <th id="compromissoOutput"><?=$row['compromisso']?></th>
                             <th id="descricaoOutput"><?=$row['descricao']?></th>
-                            <th><a href='javascript:;' onclick='editarData(document.getElementById("dataOutput").value); editarCompromisso(document.getElementById("compromissoOutput")); editarDescricao(document.getElementById("descricaoOutput")); pegarId(document.getElementById("id")); revelarUpdate();'>Editar Compromisso</a></th>
+                            <th class="Seletor  btn btn-primary mb-2" onmouseover="window.status=''; return true" onClick="revelarEditar();dataRef('<?=$id?>','<?=$dataOutput?>','<?=$row['compromisso']?>','<?=$row['descricao']?>');" ><a>Editar</a></th>
+                            <th class="Seletor  btn btn-primary mb-2"><a class="Delete" href="delete.php?mes=<?=$data[1]?>&ano=<?=$data[0]?>&id=<?=$id?>">Excluir</a></th>
                             </tr>
                         
                             
@@ -322,31 +291,6 @@ $nomeDoMes = $mesEstenso[$numeroDoMes];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-<script>
-    function data(i, mes, ano){
-        document.form.data.value = (i + "/" + mes + "/" + ano);
-    }
-
-    function revelarInsert(){
-        document.getElementById('formInsert').style.display = 'inline';
-    }
-    function revelarUpdate(){
-        document.getElementById('formUpdate').style.display = 'inline';
-    }
-
-    function editarData(dataOuput){
-        document.getElementById('dataUpdate').value = (dataOutput.innerHTML);
-    }
-    function editarCompromisso(compromissoOutput){
-        document.getElementById('compromissoUpdate').value = (compromissoOutput.innerHTML);
-    }
-    function editarDescricao(descricaoOutput){
-        document.getElementById('descricaoUpdate').value = (descricaoOutput.innerHTML);
-    }
-    function pegarId(id){
-        document.getElementById('idUpdate').value = (id.innerHTML);
-    }
-</script>
-
-    </body>
+<script type="application/javascript" src="app.js"></script>
+</body>
 </html>

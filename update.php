@@ -27,7 +27,7 @@ $databd = $data[2] . "-" . $data[1] . "-" . $data[0];
 $sqlUpdate = "UPDATE compromisso SET compromisso = '$compromissoUpdate', descricao = '$descricaoUpdate' WHERE id = '$id'";
 
     if($conn->query($sqlUpdate) === TRUE){
-        header("location: /teste/Calen2.php?mes=" . $data[1]. "&ano=" . $data[2]);
+        header("location: /agenda/Calen2.php?mes=" . $data[1]. "&ano=" . $data[2]);
     die();
     }else{
         echo "Error: " . $sqlUpdate . "<br>" . $conn->error;
